@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Royalcms\\Component\\Wechat\\": "Royalcms/Component/Wechat"
+            "Royalcms\\Component\\WeChat\\": "Royalcms/Component/WeChat"
         }
     },
     "extra": {
@@ -28,10 +28,10 @@
         },
         "royalcms": {
             "providers": [
-                "Royalcms\\Component\\Wechat\\WechatServiceProvider"
+                "Royalcms\\Component\\WeChat\\WeChatServiceProvider"
             ],
             "aliases": {
-                "RC_Wechat": "Royalcms\\Component\\Wechat\\Facades\\Wechat"
+                "RC_Wechat": "Royalcms\\Component\\WeChat\\Facades\\WeChat"
             }
         }
     },
