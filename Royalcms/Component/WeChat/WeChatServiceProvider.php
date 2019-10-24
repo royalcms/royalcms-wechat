@@ -1,9 +1,13 @@
-<?php namespace Royalcms\Component\WeChat;
+<?php 
 
+namespace Royalcms\Component\WeChat;
+
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Royalcms\Component\Support\ServiceProvider;
 use Royalcms\Component\WeChat\Foundation\WeChat as WeChatContainer;
 
-class WeChatServiceProvider extends ServiceProvider {
+class WeChatServiceProvider extends ServiceProvider implements DeferrableProvider
+{
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -33,8 +37,7 @@ class WeChatServiceProvider extends ServiceProvider {
 	    
 		$this->registerWeChat();
 		
-		$this->registerBase();
-		
+
 		// Load the alias
 		$this->loadAlias();
 	}
@@ -49,6 +52,8 @@ class WeChatServiceProvider extends ServiceProvider {
 	    {
             return new WeChatContainer();
 	    });
+
+        $this->registerBase();
 	}
 	
 	/**
@@ -56,11 +61,17 @@ class WeChatServiceProvider extends ServiceProvider {
 	 */
 	protected function registerBase()
 	{
+        $royalcms = $this->royalcms;
+
 	    $wechat = $this->royalcms['wechat'];
 
-	    $wechat['request'] = $this->royalcms['request'];
-	
-	    $wechat['cache'] = $this->royalcms['cache'];
+        $wechat->singleton('request', function ($wechat) use ($royalcms) {
+            return $royalcms['request'];
+        });
+
+        $wechat->singleton('cache', function ($wechat) use ($royalcms) {
+            return $royalcms['cache'];
+        });
 	}
 	
 	/**
