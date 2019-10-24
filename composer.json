@@ -25,6 +25,14 @@
     "extra": {
         "branch-alias": {
             "dev-master": "5.0-dev"
+        },
+        "royalcms": {
+            "providers": [
+                "Royalcms\\Component\\Wechat\\WechatServiceProvider"
+            ],
+            "aliases": {
+                "RC_Wechat": "Royalcms\\Component\\Wechat\\Facades\\Wechat"
+            }
         }
     },
     "minimum-stability": "dev"
